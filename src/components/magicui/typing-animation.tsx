@@ -16,6 +16,7 @@ export default function TypingAnimation({
 }: TypingAnimationProps) {
   const [displayedText, setDisplayedText] = useState<string>('')
   const [i, setI] = useState<number>(0)
+  const [reset, setReset] = useState<boolean>(false)
 
   useEffect(() => {
     const typingEffect = setInterval(() => {
@@ -24,22 +25,27 @@ export default function TypingAnimation({
         setI(i + 1)
       } else {
         clearInterval(typingEffect)
+        setTimeout(() => {
+          setDisplayedText('')
+          setI(0)
+          setReset((prev) => !prev) // Trigger reset
+        }, duration) // Wait for the duration before resetting
       }
     }, duration)
 
     return () => {
       clearInterval(typingEffect)
     }
-  }, [duration, i])
+  }, [i, reset]) // Include reset in dependency array to restart effect
 
   return (
     <h1
       className={cn(
-        'font-display text-center text-4xl leading-[5rem] tracking-[-0.02em] drop-shadow-sm',
+        'font-display text-center  leading-[5rem] tracking-[-0.02em] drop-shadow-sm',
         className
       )}
     >
-      {displayedText ? displayedText : text}
+      {displayedText + (i < text.length ? '|' : '')}
     </h1>
   )
 }

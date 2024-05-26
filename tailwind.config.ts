@@ -12,14 +12,31 @@ const config: Config = {
     extend: {
       container: {
         center: true,
+        padding:{
+          DEFAULT: '1rem',
+          sm: '2rem',
+          lg: '4rem',
+          xl: '5rem',
+        }
       },
       keyframes: {
         love: {
           '100%': { transform: 'scale(1.2)' },
         },
+        orbit: {
+          '0%': {
+            transform:
+              'rotate(0deg) translateY(calc(var(--radius) * 1px)) rotate(0deg)',
+          },
+          '100%': {
+            transform:
+              'rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg)',
+          },
+        },
       },
       animation: {
         love: 'love 0.5s linear infinite alternate-reverse',
+        orbit: 'orbit calc(var(--duration)*1s) linear infinite',
       },
     },
   },

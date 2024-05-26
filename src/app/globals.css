@@ -5,3 +5,7 @@
 .button {
   @apply bg-slate-950 text-white dark:bg-slate-400 dark:text-black;
 }
+
+.section-home {
+  @apply py-6 sm:py-9 lg:py-12
+}
